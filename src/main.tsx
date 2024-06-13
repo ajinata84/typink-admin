@@ -13,6 +13,9 @@ import { Toaster } from "./components/ui/toaster.tsx";
 import LiteraturePage from "./routes/Literature.tsx";
 import ChapterPage from "./routes/Chapter.tsx";
 import ProtectedRoute from "./components/ProtectedRoute.tsx"; // Import the ProtectedRoute component
+import CreateForum from "./routes/CreateForum.tsx";
+import Announcements from "./routes/Announcements.tsx";
+import EditForum from "./routes/EditForum.tsx";
 
 const router = createBrowserRouter([
   {
@@ -72,6 +75,30 @@ const router = createBrowserRouter([
     element: (
       <ProtectedRoute>
         <ChapterComments />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/announcements",
+    element: (
+      <ProtectedRoute>
+        <Announcements />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/create-announcement",
+    element: (
+      <ProtectedRoute>
+        <CreateForum />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/edit-announcement/:forumId",
+    element: (
+      <ProtectedRoute>
+        <EditForum />
       </ProtectedRoute>
     ),
   },
