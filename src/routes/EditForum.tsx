@@ -109,7 +109,7 @@ export default function EditForum() {
     <Layout>
       <div className="flex flex-col justify-center gap-8 items-center">
         <h1 className="text-3xl font-semibold text-center">
-          Create Announcement
+          Edit Announcement
         </h1>
         <form className="w-full " onSubmit={handleSubmit(onSubmit)}>
           <Input
