@@ -32,7 +32,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           Log out
         </Button>
       </div>
-      <div className="w-full">{children}</div>
+      <div className="w-full mr-4">{children}</div>
     </div>
   );
 }
