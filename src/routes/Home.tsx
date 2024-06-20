@@ -3,22 +3,20 @@ import { getApiURL } from "@/util/constants";
 import axios from "axios";
 import Cookies from "js-cookie";
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 
-interface author {
+interface Author {
+  id: string;  // Added id property
   username: string;
   totalDonations: number;
 }
 
 export default function Home() {
   const [totalAuthor, setTotalAuthor] = useState(0);
-  const [authors, setAuthors] = useState<author[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [authors, setAuthors] = useState<Author[]>([]);
 
   const token = Cookies.get("token");
 
   useEffect(() => {
-
     async function fetchData() {
       try {
         const response = await axios.get<{ totalUsers: number }>(
@@ -30,14 +28,12 @@ export default function Home() {
         setTotalAuthor(response.data.totalUsers);
       } catch (error) {
         console.error("Error fetching data:", error);
-      } finally {
-        setLoading(false);
       }
     }
 
     async function fetchAuthors() {
       try {
-        const response = await axios.get<author[]>(
+        const response = await axios.get<Author[]>(
           `${getApiURL()}/admin/authors/most-donated`,
           {
             headers: { Authorization: `Bearer ${token}` },
@@ -46,15 +42,12 @@ export default function Home() {
         setAuthors(response.data);
       } catch (error) {
         console.error("Error fetching data:", error);
-      } finally {
-        setLoading(false);
       }
     }
 
     fetchAuthors();
-
     fetchData();
-  }, []);
+  }, [token]);
 
   return (
     <Layout>
@@ -81,9 +74,7 @@ export default function Home() {
             </tbody>
           </table>
         </div>
-  
       </div>
     </Layout>
   );
-  
 }
