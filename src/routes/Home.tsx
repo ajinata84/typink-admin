@@ -60,20 +60,30 @@ export default function Home() {
     <Layout>
       <div className="w-full">
         <h1 className="mb-4">Total author: {totalAuthor}</h1>
-        <div>
-          <h1 className="font-bold text-3xl">Top Earning:</h1>
-          {authors.map((v, i) => (
-            <div className="mb-4 mt-4">
-              <div className="text-2xl">
-                {i + 1}. {v.username}
-              </div>
-              <span>
-                Total Donation Rp. {v.totalDonations.toLocaleString()}
-              </span>
-            </div>
-          ))}
+        
+        <div className="overflow-x-auto">
+          <table className="min-w-full bg-white border-gray-200 shadow-md rounded-md">
+            <thead>
+              <tr className="bg-gray-100 border-b border-gray-300">
+                <th className="px-6 py-3 text-left text-xs font-bold text-black uppercase">Rank</th>
+                <th className="px-6 py-3 text-left text-xs font-bold text-black uppercase">Username</th>
+                <th className="px-6 py-3 text-left text-xs font-bold text-black uppercase">Total Donations</th>
+              </tr>
+            </thead>
+            <tbody>
+              {authors.map((author, index) => (
+                <tr key={author.id} className="border-b border-gray-200 hover:bg-gray-50">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{index + 1}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-black">{author.username}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-black">Rp. {author.totalDonations.toLocaleString()}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
+  
       </div>
     </Layout>
   );
+  
 }
